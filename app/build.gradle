@@ -1,0 +1,67 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
+    defaultConfig {
+        applicationId "com.example.testing.optimization"
+        minSdkVersion 14
+        targetSdkVersion 25
+        versionCode 4
+        versionName "4.1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        release {
+            storeFile       file('../optimization.jks')
+            storePassword   '111111'
+            keyAlias        'optimization'
+            keyPassword     '111111'
+        }
+    }
+
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            applicationIdSuffix 'intrest'
+            minifyEnabled true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            debuggable true       //调试日志
+        }
+        debug {
+            signingConfig signingConfigs.release
+            applicationIdSuffix 'intrest'
+            minifyEnabled true
+            zipAlignEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //修改生成的包名
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            output.outputFile = new File(outputFile.parent, outputFile.name.replace(".apk", "-" + defaultConfig.versionName + ".apk"))
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.3.0'
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:recyclerview-v7:25.3.0'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.github.bumptech.glide:glide:4.0.0-RC0'
+}

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="onBindClick"
+            type="View.OnClickListener"/>
+
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/showDatas"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="vertical"
+            android:scrollbarStyle="insideOverlay"/>
+        <View style="@style/line_horizontal"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/personId"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:hint="关注Id"
+                android:layout_marginLeft="10dp"/>
+            <Button
+                android:id="@+id/addPerson"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="添加关注"
+                android:onClick="@{onBindClick}"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

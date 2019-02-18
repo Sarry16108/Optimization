@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="com.example.testing.optimization.databindings.DatabindingUtls"/>
+
+        <variable
+            name="personInfo"
+            type="com.example.testing.optimization.entity.UserSimpleInfo"/>
+        <variable
+            name="stockInfo"
+            type="com.example.testing.optimization.entity.PersonalPub.FbbTodayItemListBean.StockItemInfo"/>
+
+    </data>
+
+    <LinearLayout
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center_vertical"
+        android:paddingBottom="5dp">
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView style="@style/imgPotrait"
+                app:img_url="@{personInfo.headImg}"/>
+            <ImageView style="@style/imgInterest"
+                app:visibility="@{personInfo.isInteresting}"/>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp">
+            <TextView
+                style="@style/TagWrap"
+                android:text="@{DatabindingUtls.getRecordItemName(personInfo)}"
+                tools:text="王小二(排行N，Id=9999)"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="17sp"
+                app:buyItemTextAndColor="@{stockInfo}"
+                android:gravity="right"/>
+            <TextView style="@style/TagWrap"
+                android:layout_width="match_parent"
+                android:text="@{DatabindingUtls.getRecordItemContent(stockInfo)}"
+                tools:text="看空/看多XXX多少手"
+                android:layout_marginTop="5dp"
+                android:lineSpacingExtra="3dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

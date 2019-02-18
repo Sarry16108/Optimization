@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.example.testing.optimization.utils.StringUtils" />
+        <import type="com.example.testing.optimization.databindings.DatabindingUtls"/>
+
+        <variable
+            name="stockInfo"
+            type="com.example.testing.optimization.entity.StockInfo" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingRight="15dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:id="@+id/stockName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{stockInfo.name}"
+                android:textColor="@color/app_black"
+                android:textSize="@dimen/text_title_bar"
+                tools:text="小李子" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/stockName">
+                <TextView
+                    style="@style/TextNormalBlackCenter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{DatabindingUtls.getRecommandCodeInfo(stockInfo)}"
+                    tools:text="小李子2"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:minWidth="50dp"
+                    android:text="@{StringUtils.intToString(stockInfo.hotDegree)}"
+                    android:textColor="#ff0000"
+                    android:textStyle="bold|italic"
+                    tools:text="100" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <View style="@style/line_horizontal" android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:layout_marginLeft="5dp">
+
+            <TextView
+                style="@style/TextNormalBlackCenter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text='@{DatabindingUtls.getBullData(stockInfo)}'
+                app:recommandTextColor="@{stockInfo}"
+                app:isBull="@{true}"
+                tools:text="小李子2"
+                android:gravity="left"/>
+
+            <TextView
+                style="@style/TextNormalBlackCenter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text='@{DatabindingUtls.getBearData(stockInfo)}'
+                app:recommandTextColor='@{stockInfo}'
+                app:isBull="@{false}"
+                tools:text="小李子2"
+                android:gravity="left"/>
+        </LinearLayout>
+    </LinearLayout>
+</layout>
